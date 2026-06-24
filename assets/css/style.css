@@ -1,0 +1,138 @@
+button{
+    color :rgb(255, 255, 255);
+    background-color: purple;
+    font-size: 20px;
+    border: 2px solid white;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px white;
+    text-align: center;
+    
+}
+
+button:hover{
+    background-color: rgb(255, 0, 255);
+    cursor: pointer;
+    height: 30px;
+}
+
+button:active{
+    background-color: rgb(255, 1, 255); transition: 0.8s;
+    cursor: pointer;
+    height: 30px;
+    
+}
+
+input{
+    color: rgb(255, 255, 255);
+    font-size: 28px;
+    background-color: rgb(0, 0, 0);
+    border : 2px solid purple;
+    height: 40px;
+    margin: 10px;
+    outline: none;
+    text-align: center;
+    border: 2px solid white;
+    
+    
+    
+}
+
+h1{
+    color: rgb(243, 243, 243);
+    font-size: 50px;
+    text-align: center;
+    font-family: times new roman;
+    text-shadow: 2px 2px 4px rgb(255, 0, 255);
+    
+    
+    
+}
+
+h2{
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    text-align: center;
+    font-family: times new roman;
+    text-shadow: 2px 2px 4px rgb(255, 0, 255);
+    
+}
+
+body{
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: times new roman;
+    transition: 1s;
+}
+
+p{
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    text-align: center;
+    font-family: times new roman;
+    
+}
+
+h1:hover{
+    color: rgb(255, 0, 255);
+    transition: 0.3s;
+}
+
+li{
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    font-family: times new roman;
+    text-shadow: 2px 2px 4px rgb(255, 0, 255);
+    background-color: purple;
+    border-radius: 10px;
+    margin: 15px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    border: 2px solid white;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+
+span{
+    font-size: 30px;
+    margin: 0 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+a{
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    text-decoration: none;
+    margin: 0 10px;
+    text-align: center;
+}
+a:hover{
+    color: rgb(255, 0, 255);
+    transition: 0.3s;
+}
+
+.concluir,
+.excluir{
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.concluida{
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+#btnConcluirTodas,
+#btnExcluirTudo{
+    display:none;
+}

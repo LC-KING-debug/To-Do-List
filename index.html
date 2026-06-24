@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <title>To-do List</title>
+</head>
+<body>
+
+    <header>
+        <h1>Minha To-do List</h1>
+    </header>
+
+    <main>
+
+        <input
+    type="text"
+    id="tarefaInput"
+    placeholder="Digite sua tarefa"
+>
+
+<button onclick="adicionarTarefa()">
+    Adicionar tarefa
+</button>
+
+<button id="btnConcluirTodas" onclick="concluirTodas()">
+    Concluir Todas
+</button>
+
+<button id="btnExcluirTudo" onclick="excluirTudo()">
+    Excluir Tudo
+</button>
+
+<ul id="listaTarefas"></ul>
+
+    </main>
+
+    <footer>
+        <p>Lista de tarefa made by LC</p>
+
+        <a href="https://github.com/LC-KING-debug" target="_blank">
+            GitHub
+        </a>
+
+        <a href="https://www.linkedin.com/in/luciuskether/" target="_blank">
+            LinkedIn
+        </a>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+
+</body>
+</html>
