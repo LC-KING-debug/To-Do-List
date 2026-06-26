@@ -21,41 +21,25 @@
 }
 
 @keyframes glow{
-
-0%{
-
-text-shadow:
-0 0 5px #ff00ff;
-
+    0%{
+        text-shadow: 0 0 5px #00ffff;
+    }
+    50%{
+        text-shadow: 0 0 25px #00ffff;
+    }
+    100%{
+        text-shadow: 0 0 5px #00ffff;
+    }
 }
-
-50%{
-
-text-shadow:
-0 0 25px #ff00ff;
-
-}
-
-100%{
-
-text-shadow:
-0 0 5px #ff00ff;
-
-}
-
-}
-
 
 @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-
+/* CURSOR GLOBAL - Aplica em todo o site */
+* {
+    cursor: url("/assets/imgs/cursor1.cur"), auto !important;
 }
 
 main{
@@ -63,165 +47,152 @@ main{
     border-radius: 10px;
     border:2px solid rgb(255, 255, 255);
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(8px);
-}
-
-button{
-    color :rgb(255, 255, 255);
-    background-color: purple;
-    font-size: 20px;
-    border: 2px solid white;
-    cursor: pointer;
-    text-shadow: 1px 1px 1px white;
-    text-align: center;
-    
-}
-
-button:hover{
-    transform: scale(1.05);
-    background-color: rgb(255, 0, 255);
-    cursor: pointer;
-    height: 30px;
-    
-}
-
-button:active{
-    background-color: rgb(255, 1, 255); transition: 0.8s;
-    cursor: pointer;
-    height: 60px;
-    transform: scale(0.95);
-    
-    
 }
 
 input{
     color: rgb(0, 0, 0);
     font-size: 28px;
     background-color: rgb(255, 255, 255);
-    border : 2px solid purple;
+    border: 2px solid rgb(255, 255, 255);
     height: 40px;
     margin: 10px;
     outline: none;
     text-align: center;
-    border: 2px solid rgb(255, 255, 255);
-    box-shadow: 0 0 5px white,
-    0 0 5px white,
-    0 0 5px white;
-     border: 2px solid rgb(63, 26, 63);
-    box-shadow: 0 0 5px #470e47,
-    0 0 5px #ff00ff,
-    0 0 20px #ff00ff;
-    
-    
-    
+    box-shadow: 0 0 5px #ffffff,
+                0 0 5px #ffffff,
+                0 0 20px #ffffff;
 }
 
+button {
+    background: linear-gradient(#1a1a1a, #000000);
+    color: white;
+    border: 2px solid #0c1d1d;
+    padding: 15px 35px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 7px;
+    box-shadow:
+        inset 0 2px 2px rgba(255,255,255,.3),
+        0 8px 0 #576464,
+        0 10px 15px rgba(0,0,0,.6);
 
+    transition: all .25s ease;
+}
 
-   
+button:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        inset 0 2px 2px rgb(255, 255, 255),
+        0 10px 0 #ffffff,
+        0 15px 25px rgba(0,0,0,.6);
+}
+
+button:active {
+    transform: translateY(8px);
+    box-shadow:
+        inset 0 2px 2px rgba(255,255,255,.3),
+        0 1px 0 #ffffff,
+        0 2px 6px rgba(0,0,0,.3);
+}
+
+#relogio{
+    color: white;
+    font-size: 35px;
+    font-family: "Times New Roman", serif;
+    text-shadow: 0 0 10px cyan;
+    margin-top: 20px;
+}
+
 h1{
-    color: rgb(243, 243, 243);
+    color: rgb(255, 255, 255);
     font-size: 50px;
     text-align: center;
     font-family: times new roman;
     text-shadow: 
-    0 0 5px #ff00ff,
-    0 0 10px #ff00ff,
-    0 0 20px #ff00ff;
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 20px #00ffff;
     animation: glow 3s infinite alternate;
-    
-    
 }
-
-
 
 body{
     background:
-    linear-gradient(180deg, rgb(0, 0, 0), rgb(18,0,30));
+        linear-gradient(rgb(2, 2, 2), rgba(19, 44, 77, 0.452)),
+        url("/assets/imgs/fundo.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
     text-align: center;
     max-width: 500px;
     margin: 0 auto;
-    font-family: times new roman;
-    transition: 1s;
-    animation: fadeIn 3s ease-in-out;
-    
+    font-family: "Times New Roman", serif;
+    animation: fadeIn 2s ease-in-out;
 }
-
-
 
 p{
     color: rgb(255, 255, 255);
     font-size: 20px;
     text-align: center;
     font-family: times new roman;
-    
 }
 
 h1:hover{
-    color: rgb(255, 0, 255);
+    color: rgb(255, 255, 255);
     transition: 0.3s;
 }
 
 li{
     color: rgb(255, 255, 255);
-    font-size: 30px;
+    font-size: 20px;
     font-family: Times New Roman;
     text-shadow:
-        0 0 5px #ff00ff,
-        0 0 10px #ff00ff,
-        0 0 20px #ff00ff;
-    background-color: purple;
+        0 0 5px #000000,
+        0 0 10px #000000,
+        0 0 20px #f6ffff;
+    background-color: #0a0a0a;
     border-radius: 10px;
-    margin: 15px;
+    margin: 12px;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
-    border: 2px solid white;
+    border: 2px solid #ffffff;
 
     animation: aparecertarefas 1s ease-in-out;
-
     transition: all .4s ease;
 }
 
 .concluida{
-
     text-decoration: line-through;
-
     opacity: .7;
-
-    color: #8aff8a;
-
+    color: #aaffaa;
     text-shadow:
         0 0 10px #00ff88,
         0 0 20px #00ff88;
-
 }
+
 .excluindo{
-
-    background: #7a0000;
-
+    background: #330000;
     box-shadow:
         0 0 15px red,
         0 0 25px red;
-
     opacity: 0;
-
     transform: translateX(40px);
-
 }
-
 
 li:hover{
     transform: translateY(-3px);
-    box-shadow: 0 0 15px #ff00ff;
+    box-shadow: 0 0 15px #ffffff;
 }
 
 li:active{
-    background-color: rgb(255, 1, 255); transition: 0.8s;
-    cursor: pointer;
+    background-color: rgb(30, 30, 30);
+    transition: 0.8s;
     transform: scale(0.95);
 }
 
@@ -230,11 +201,9 @@ ul{
     padding: 0;
 }
 
-
 span{
     font-size: 30px;
     margin: 0 10px;
-    cursor: pointer;
     text-align: center;
 }
 
@@ -245,24 +214,19 @@ a{
     margin: 0 10px;
     text-align: center;
 }
+
 a:hover{
-    color: rgb(255, 0, 255);
+    color: rgb(0, 255, 255);
     transition: 0.3s;
     text-shadow:
-    0 0 5px #ff00ff,
-    0 0 10px #ff00ff,
-    0 0 20px #ff00ff;
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 20px #00ffff;
 }
 
 .concluir,
 .excluir{
-    cursor: pointer;
     font-size: 25px;
-}
-
-.concluida{
-    text-decoration: line-through;
-    opacity: 0.6;
 }
 
 #btnConcluirTodas,
@@ -270,4 +234,9 @@ a:hover{
     display:none;
 }
 
-
+footer{
+    margin: 60px;
+    text-align:center;
+    font-style: italic;
+    
+}

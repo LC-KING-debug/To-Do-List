@@ -4,11 +4,11 @@ window.onload = function () {
 };
 
 // ==================== ÁUDIOS ====================
-const somAdicionar     = new Audio("assets/sounds/adicionartarefa.mp3");
-const somConcluir      = new Audio("assets/sounds/concluida.mp3");
-const somExcluir       = new Audio("assets/sounds/lixeira.mp3");
+const somAdicionar     = new Audio("assets/sounds/adicionar.mp3");
+const somConcluir      = new Audio("assets/sounds/concluir.mp3");
+const somExcluir       = new Audio("assets/sounds/lixeira1.mp3");
 const somExcluirTudo   = new Audio("assets/sounds/excluirtudo.mp3");
-const somConcluirTudo  = new Audio("assets/sounds/concluirtudo.mp3");   // ← Novo áudio
+const somConcluirTudo  = new Audio("assets/sounds/concluirtodos.mp3");  
 
 // Ajuste de volume (pode mudar depois)
 somAdicionar.volume = 0.7;
@@ -88,7 +88,7 @@ function concluirTodas() {
         tarefa.classList.add("concluida");
     });
 
-    // Som específico para concluir tudo
+  //Som específico para concluir tudo
     somConcluirTudo.currentTime = 0;
     somConcluirTudo.play();
 
@@ -154,3 +154,22 @@ function carregarTarefas() {
         criarTarefa(tarefa.texto, tarefa.concluida);
     });
 }
+
+function atualizarRelogio() {
+
+    const agora = new Date();
+
+    let horas = agora.getHours();
+    let minutos = agora.getMinutes();
+
+    horas = String(horas).padStart(2, "0");
+    minutos = String(minutos).padStart(2, "0");
+
+    let periodo = horas >= 18 || horas < 6 ? "DN" : "DT";
+
+    document.getElementById("relogio").textContent =
+        `${horas}:${minutos} ${periodo}`;
+}
+
+atualizarRelogio();
+setInterval(atualizarRelogio, 1000);
