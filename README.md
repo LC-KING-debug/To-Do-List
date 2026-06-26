@@ -13,6 +13,7 @@ Projeto desenvolvido para praticar:
 - Remover tarefas
 - Concluir tarefas
 - salvar os dados em LocalStorage
+- Salvar data e hora das tarefas
 
 ## Tecnologias
 
