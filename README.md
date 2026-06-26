@@ -24,6 +24,6 @@ Projeto desenvolvido para praticar:
 Futuramente novas implementações(commits)
 
 #DEMONSTRAÇÃO:
-<a href="https://postimg.cc/0zNwY7Mr" target="_blank">
-    <img src="https://i.postimg.cc/0zNwY7Mr/imagem-todolist.jpg" border="0" alt="imagem-todolist">
-</a>
+<p align="center">
+    <img src="https://i.postimg.cc/0zNwY7Mr/imagem-todolist.jpg" width="900">
+</p>
