@@ -25,5 +25,5 @@ Futuramente novas implementações(commits)
 
 #DEMONSTRAÇÃO:
 <p align="center">
-    <img src="https://i.postimg.cc/0zNwY7Mr/imagem-todolist.jpg" width="900">
+    <img src="https://i.postimg.cc/0zNwY7Mr/imagem-todolist.jpg" width="200">
 </p>
