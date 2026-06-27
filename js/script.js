@@ -1,6 +1,12 @@
+let tarefasExcluidas = [];
+
+// ==================== INICIALIZAÇÃO ====================
 window.onload = function () {
     carregarTarefas();
+    carregarHistorico();
     verificarBotoes();
+    atualizarRelogio();
+    trocarAba('inicio');
 };
 
 // ==================== ÁUDIOS ====================
@@ -10,13 +16,28 @@ const somExcluir       = new Audio("assets/sounds/lixeira1.mp3");
 const somExcluirTudo   = new Audio("assets/sounds/excluirtudo.mp3");
 const somConcluirTudo  = new Audio("assets/sounds/concluirtodos.mp3");  
 
-// Ajuste de volume (pode mudar depois)
 somAdicionar.volume = 0.7;
 somConcluir.volume = 0.7;
 somExcluir.volume = 0.8;
 somExcluirTudo.volume = 0.8;
 somConcluirTudo.volume = 0.85;
 
+// ==================== TROCA DE ABAS ====================
+function trocarAba(aba) {
+    document.getElementById('abaInicio').style.display = aba === 'inicio' ? 'block' : 'none';
+    document.getElementById('abaHistorico').style.display = aba === 'historico' ? 'block' : 'none';
+
+    document.getElementById('btnInicio').classList.toggle('active', aba === 'inicio');
+    document.getElementById('btnHistorico').classList.toggle('active', aba === 'historico');
+}
+
+document.getElementById('btnInicio').addEventListener('click', () => trocarAba('inicio'));
+document.getElementById('btnHistorico').addEventListener('click', () => {
+    trocarAba('historico');
+    carregarHistorico();
+});
+
+// ==================== TAREFAS ====================
 function adicionarTarefa() {
     const input = document.getElementById("tarefaInput");
     const texto = input.value.trim();
@@ -29,10 +50,9 @@ function adicionarTarefa() {
     criarTarefa(texto);
 
     somAdicionar.currentTime = 0;
-    somAdicionar.play();
+    somAdicionar.play().catch(() => {}); // evita erro se áudio bloquear
 
     input.value = "";
-    
     salvarTarefas();
     verificarBotoes();
 }
@@ -55,26 +75,36 @@ function criarTarefa(texto, concluida = false) {
         textoTarefa.classList.add("concluida");
     }
 
+    // Concluir tarefa
     botaoConcluir.addEventListener("click", () => {
         textoTarefa.classList.toggle("concluida");
-        
         somConcluir.currentTime = 0;
-        somConcluir.play();
-
+        somConcluir.play().catch(() => {});
         salvarTarefas();
     });
 
+    // Excluir tarefa
     botaoExcluir.addEventListener("click", () => {
         li.classList.add("excluindo");
 
         setTimeout(() => {
-            li.remove();
-            
-            somExcluir.currentTime = 0;
-            somExcluir.play();
+            const textoTarefa = li.querySelector(".texto-tarefa").textContent;
+            const estavaConcluida = li.querySelector(".texto-tarefa").classList.contains("concluida");
 
+            // Salva no histórico
+            tarefasExcluidas.unshift({
+                texto: textoTarefa,
+                concluida: estavaConcluida,
+                data: new Date().toLocaleString()
+            });
+
+            li.remove();
             salvarTarefas();
+            salvarHistorico();
             verificarBotoes();
+
+            somExcluir.currentTime = 0;
+            somExcluir.play().catch(() => {});
         }, 400);
     });
 
@@ -82,54 +112,81 @@ function criarTarefa(texto, concluida = false) {
 }
 
 function concluirTodas() {
-    const tarefas = document.querySelectorAll(".texto-tarefa");
-    
-    tarefas.forEach(tarefa => {
+    document.querySelectorAll("#listaTarefas .texto-tarefa").forEach(tarefa => {
         tarefa.classList.add("concluida");
     });
 
-  //Som específico para concluir tudo
     somConcluirTudo.currentTime = 0;
-    somConcluirTudo.play();
-
+    somConcluirTudo.play().catch(() => {});
     salvarTarefas();
 }
 
 function excluirTudo() {
-    const confirmar = confirm("Deseja excluir todas as tarefas?");
-
-    if (!confirmar) return;
+    if (!confirm("Deseja excluir todas as tarefas?")) return;
 
     const lista = document.getElementById("listaTarefas");
-    const tarefas = lista.querySelectorAll("li");
+    const tarefas = Array.from(lista.querySelectorAll("li"));
 
     tarefas.forEach(li => {
+        const texto = li.querySelector(".texto-tarefa").textContent;
+        const concluida = li.querySelector(".texto-tarefa").classList.contains("concluida");
+        
+        tarefasExcluidas.unshift({
+            texto,
+            concluida,
+            data: new Date().toLocaleString()
+        });
         li.classList.add("excluindo");
     });
 
     setTimeout(() => {
         lista.innerHTML = "";
-        
-        somExcluirTudo.currentTime = 0;
-        somExcluirTudo.play();
-
         salvarTarefas();
+        salvarHistorico();
         verificarBotoes();
+
+        somExcluirTudo.currentTime = 0;
+        somExcluirTudo.play().catch(() => {});
     }, 400);
 }
 
+// ==================== HISTÓRICO ====================
+function salvarHistorico() {
+    localStorage.setItem("tarefasExcluidas", JSON.stringify(tarefasExcluidas));
+}
+
+function carregarHistorico() {
+    const salvo = localStorage.getItem("tarefasExcluidas");
+    if (salvo) tarefasExcluidas = JSON.parse(salvo);
+
+    const lista = document.getElementById("listaHistorico");
+    lista.innerHTML = "";
+
+    tarefasExcluidas.forEach(item => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+            <span>${item.texto}</span>
+            <small>${item.data}</small>
+        `;
+        lista.appendChild(li);
+    });
+}
+
+function limparHistorico() {
+    if (!confirm("Tem certeza que quer limpar todo o histórico?")) return;
+    
+    tarefasExcluidas = [];
+    salvarHistorico();
+    carregarHistorico();
+}
+
+// ==================== AUXILIARES ====================
 function verificarBotoes() {
     const lista = document.getElementById("listaTarefas");
-    const btnConcluir = document.getElementById("btnConcluirTodas");
-    const btnExcluir = document.getElementById("btnExcluirTudo");
+    const temTarefas = lista.children.length > 0;
 
-    if (lista.children.length > 0) {
-        btnConcluir.style.display = "inline-block";
-        btnExcluir.style.display = "inline-block";
-    } else {
-        btnConcluir.style.display = "none";
-        btnExcluir.style.display = "none";
-    }
+    document.getElementById("btnConcluirTodas").style.display = temTarefas ? "inline-block" : "none";
+    document.getElementById("btnExcluirTudo").style.display = temTarefas ? "inline-block" : "none";
 }
 
 function salvarTarefas() {
@@ -140,7 +197,6 @@ function salvarTarefas() {
             concluida: li.querySelector(".texto-tarefa").classList.contains("concluida")
         });
     });
-
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
 }
 
@@ -148,28 +204,19 @@ function carregarTarefas() {
     const tarefasSalvas = localStorage.getItem("tarefas");
     if (!tarefasSalvas) return;
 
-    const tarefas = JSON.parse(tarefasSalvas);
-
-    tarefas.forEach(tarefa => {
+    JSON.parse(tarefasSalvas).forEach(tarefa => {
         criarTarefa(tarefa.texto, tarefa.concluida);
     });
 }
 
+// ==================== RELÓGIO ====================
 function atualizarRelogio() {
-
     const agora = new Date();
+    let horas = String(agora.getHours()).padStart(2, "0");
+    let minutos = String(agora.getMinutes()).padStart(2, "0");
+    let periodo = (horas >= 18 || horas < 6) ? "DN" : "DT";
 
-    let horas = agora.getHours();
-    let minutos = agora.getMinutes();
-
-    horas = String(horas).padStart(2, "0");
-    minutos = String(minutos).padStart(2, "0");
-
-    let periodo = horas >= 18 || horas < 6 ? "DN" : "DT";
-
-    document.getElementById("relogio").textContent =
-        `${horas}:${minutos} ${periodo}`;
+    document.getElementById("relogio").textContent = `${horas}:${minutos} ${periodo}`;
 }
 
-atualizarRelogio();
 setInterval(atualizarRelogio, 1000);

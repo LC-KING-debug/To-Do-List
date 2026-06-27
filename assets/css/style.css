@@ -102,6 +102,7 @@ button:active {
     font-family: "Times New Roman", serif;
     text-shadow: 0 0 10px cyan;
     margin-top: 20px;
+    font-style: italic;
 }
 
 h1{
@@ -114,6 +115,7 @@ h1{
         0 0 10px #00ffff,
         0 0 20px #00ffff;
     animation: glow 3s infinite alternate;
+    font-style: italic;
 }
 
 body{
@@ -239,4 +241,58 @@ footer{
     text-align:center;
     font-style: italic;
     
+}
+
+h2{
+color: rgb(255, 255, 255);
+    font-size: 25px;
+    text-align: center;
+    font-family: times new roman;
+    text-shadow: 
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 20px #00ffff;
+    animation: glow 3s infinite alternate;
+    font-style: italic;
+}
+
+
+
+/* Estilo do Texto Sem Caixa/Borda */
+.frase-texto-pura {
+    font-size: 22px;
+    color: #a0aec0; /* Cor padrão discreta */
+    text-align: center;
+    margin: 10px auto 25px auto;
+    max-width: 80%;
+    cursor: pointer;
+    font-style: italic;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+    user-select: none; 
+    display: block;
+}
+
+
+.frase-texto-pura strong {
+    display: block;
+    font-size: 13px;
+    color: #718096;
+    margin-top: 5px;
+    font-style: normal;
+    transition: all 0.3s ease;
+}
+
+
+.frase-texto-pura:hover {
+    color: #ffffff;
+    /* Gera o brilho branco em volta de cada letra */
+    text-shadow: 0 0 4px #ffffff, 
+                 0 0 10px #ffffff, 
+                 0 0 20px #ffffff;
+    transform: scale(1.02); 
+}
+
+.frase-texto-pura:hover strong {
+    color: #ffffff;
 }
