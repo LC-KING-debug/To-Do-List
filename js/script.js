@@ -6,21 +6,26 @@ window.onload = function () {
     carregarHistorico();
     verificarBotoes();
     atualizarRelogio();
+    atualizarFrase(); // <-- Executa a função do arquivo APIS/apifrases.js
     trocarAba('inicio');
 };
 
 // ==================== ÁUDIOS ====================
-const somAdicionar     = new Audio("assets/sounds/adicionar.mp3");
-const somConcluir      = new Audio("assets/sounds/concluir.mp3");
-const somExcluir       = new Audio("assets/sounds/lixeira1.mp3");
-const somExcluirTudo   = new Audio("assets/sounds/excluirtudo.mp3");
-const somConcluirTudo  = new Audio("assets/sounds/concluirtodos.mp3");  
+const somAdicionar       = new Audio("assets/sounds/adicionar.mp3");
+const somConcluir        = new Audio("assets/sounds/concluir.mp3");
+const somExcluir         = new Audio("assets/sounds/lixeira1.mp3");
+const somExcluirTudo     = new Audio("assets/sounds/excluirtudo.mp3");
+const somConcluirTudo    = new Audio("assets/sounds/concluirtodos.mp3");  
+const somExcluirHistorico = new Audio("assets/sounds/apagarhistorico.mp3");
+const somTrocadeAba      = new Audio("assets/sounds/trocadeaba.mp3");
 
 somAdicionar.volume = 0.7;
 somConcluir.volume = 0.7;
 somExcluir.volume = 0.8;
 somExcluirTudo.volume = 0.8;
 somConcluirTudo.volume = 0.85;
+somExcluirHistorico.volume = 0.9;
+somTrocadeAba.volume = 0.6;
 
 // ==================== TROCA DE ABAS ====================
 function trocarAba(aba) {
@@ -29,6 +34,10 @@ function trocarAba(aba) {
 
     document.getElementById('btnInicio').classList.toggle('active', aba === 'inicio');
     document.getElementById('btnHistorico').classList.toggle('active', aba === 'historico');
+
+    // Toca o som de troca de aba de forma responsiva
+    somTrocadeAba.currentTime = 0;
+    somTrocadeAba.play().catch(() => {});
 }
 
 document.getElementById('btnInicio').addEventListener('click', () => trocarAba('inicio'));
@@ -50,7 +59,7 @@ function adicionarTarefa() {
     criarTarefa(texto);
 
     somAdicionar.currentTime = 0;
-    somAdicionar.play().catch(() => {}); // evita erro se áudio bloquear
+    somAdicionar.play().catch(() => {}); 
 
     input.value = "";
     salvarTarefas();
@@ -88,12 +97,12 @@ function criarTarefa(texto, concluida = false) {
         li.classList.add("excluindo");
 
         setTimeout(() => {
-            const textoTarefa = li.querySelector(".texto-tarefa").textContent;
+            const textoConteudo = li.querySelector(".texto-tarefa").textContent;
             const estavaConcluida = li.querySelector(".texto-tarefa").classList.contains("concluida");
 
             // Salva no histórico
             tarefasExcluidas.unshift({
-                texto: textoTarefa,
+                texto: textoConteudo,
                 concluida: estavaConcluida,
                 data: new Date().toLocaleString()
             });
@@ -175,6 +184,10 @@ function carregarHistorico() {
 function limparHistorico() {
     if (!confirm("Tem certeza que quer limpar todo o histórico?")) return;
     
+    // Toca o som de limpar o histórico antes de zerar a lista
+    somExcluirHistorico.currentTime = 0;
+    somExcluirHistorico.play().catch(() => {});
+
     tarefasExcluidas = [];
     salvarHistorico();
     carregarHistorico();
