@@ -49,13 +49,18 @@ main{
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
 }
 
-input{
+/* Ajustado para usar box-sizing e largura padrão controlada */
+#tarefaInput {
     color: rgb(0, 0, 0);
     font-size: 28px;
     background-color: rgb(255, 255, 255);
     border: 2px solid rgb(255, 255, 255);
     height: 40px;
-    margin: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-sizing: border-box;
+    margin: 10px auto;
+    display: inline-block;
     outline: none;
     text-align: center;
     box-shadow: 0 0 5px #ffffff,
@@ -240,11 +245,10 @@ footer{
     margin: 60px;
     text-align:center;
     font-style: italic;
-    
 }
 
 h2{
-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
     font-size: 25px;
     text-align: center;
     font-family: times new roman;
@@ -255,8 +259,6 @@ color: rgb(255, 255, 255);
     animation: glow 3s infinite alternate;
     font-style: italic;
 }
-
-
 
 /* Estilo do Texto Sem Caixa/Borda */
 .frase-texto-pura {
@@ -273,7 +275,6 @@ color: rgb(255, 255, 255);
     display: block;
 }
 
-
 .frase-texto-pura strong {
     display: block;
     font-size: 13px;
@@ -283,10 +284,8 @@ color: rgb(255, 255, 255);
     transition: all 0.3s ease;
 }
 
-
 .frase-texto-pura:hover {
     color: #ffffff;
-    /* Gera o brilho branco em volta de cada letra */
     text-shadow: 0 0 4px #ffffff, 
                  0 0 10px #ffffff, 
                  0 0 20px #ffffff;
@@ -295,4 +294,47 @@ color: rgb(255, 255, 255);
 
 .frase-texto-pura:hover strong {
     color: #ffffff;
+}
+
+/* ==================== RESPONSIVIDADE MOBILE ==================== */
+@media (max-width: 600px) {
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    main, .container, #abaInicio {
+        width: 95% !important;
+        max-width: 100% !important;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    /* Input agora preenche certinho no mobile */
+    #tarefaInput {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 45px;
+        font-size: 18px; 
+        box-sizing: border-box;
+    }
+
+    .botoes {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .botoes button {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 5px 0;
+        padding: 12px;
+    }
+    
+    h1 {
+        font-size: 36px;
+    }
 }
