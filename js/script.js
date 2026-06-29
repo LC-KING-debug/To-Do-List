@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-// URLs do meu servidor local apontando para as novas rotas unificadas
-const API_TAREFAS   = "http://127.0.0.1:5000/api/tarefas";
-const API_HISTORICO = "http://127.0.0.1:5000/api/historico";
-const API_FRASE     = "http://127.0.0.1:5000/api/frase"; // Nova rota de frases do Flask!
-=======
-// Exemplo de como deve ficar o topo do seu js/script.js
 const API_TAREFAS   = "https://todolist-api-backend.onrender.com/api/tarefas";
 const API_HISTORICO = "https://todolist-api-backend.onrender.com/api/historico";
 const API_FRASE     = "https://todolist-api-backend.onrender.com/api/frase";
->>>>>>> 56cbcd0 (Deploy e requirements)
+
 
 let tarefasExcluidas = [];
 
@@ -22,14 +15,14 @@ window.onload = function () {
     trocarAba('inicio');
 };
 
-// ==================== ÁUDIOS ====================
-const somAdicionar       = new Audio("assets/sounds/adicionar.mp3");
-const somConcluir        = new Audio("assets/sounds/concluir.mp3");
-const somExcluir         = new Audio("assets/sounds/lixeira1.mp3");
-const somExcluirTudo     = new Audio("assets/sounds/excluirtudo.mp3");
-const somConcluirTudo    = new Audio("assets/sounds/concluirtodos.mp3");  
-const somExcluirHistorico = new Audio("assets/sounds/apagarhistorico.mp3");
-const somTrocadeAba      = new Audio("assets/sounds/trocadeaba.mp3");
+// ==================== ÁUDIOS (Caminhos Corrigidos para o Render) ====================
+const somAdicionar       = new Audio("/assets/sounds/adicionar.mp3");
+const somConcluir        = new Audio("/assets/sounds/concluir.mp3");
+const somExcluir         = new Audio("/assets/sounds/lixeira1.mp3");
+const somExcluirTudo     = new Audio("/assets/sounds/excluirtudo.mp3");
+const somConcluirTudo    = new Audio("/assets/sounds/concluirtodos.mp3");  
+const somExcluirHistorico = new Audio("/assets/sounds/apagarhistorico.mp3");
+const somTrocadeAba      = new Audio("/assets/sounds/trocadeaba.mp3");
 
 somAdicionar.volume = 0.7;
 somConcluir.volume = 0.7;
@@ -47,7 +40,7 @@ function trocarAba(aba) {
     document.getElementById('btnInicio').classList.toggle('active', aba === 'inicio');
     document.getElementById('btnHistorico').classList.toggle('active', aba === 'historico');
 
-   //som da troca de abas//
+    // Som da troca de abas
     somTrocadeAba.currentTime = 0;
     somTrocadeAba.play().catch(() => {});
 }

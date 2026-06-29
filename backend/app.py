@@ -1,17 +1,15 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import psycopg2
 import requests
 import os
 
-app = Flask(__name__)
-
+# Configura o Flask para procurar os ficheiros estáticos (CSS/JS) uma pasta acima,
+# e define que a pasta atual (backend) guarda o index.html
+app = Flask(__name__, static_folder='../', static_url_path='', template_folder='.')
 
 # ==================== SEGURANÇA: CONFIGURAÇÃO DE CORS ====================
-
-CORS(app, origins="*") 
-
-
+CORS(app, origins="*")
 
 URL_DO_BANCO_NUVEM = os.environ.get(
     'DATABASE_URL', 
@@ -29,7 +27,7 @@ def iniciar_banco():
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS tarefas (
                 id SERIAL PRIMARY KEY,
-                texto VARCHAR(255) NOT NULL, -- SEGURANÇA: Limitado o tipo TEXT para VARCHAR(255) no banco
+                texto VARCHAR(255) NOT NULL,
                 concluida BOOLEAN DEFAULT FALSE
             )
         ''')
@@ -37,7 +35,7 @@ def iniciar_banco():
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS historico (
                 id SERIAL PRIMARY KEY,
-                texto VARCHAR(255) NOT NULL, -- SEGURANÇA: Evita abusos de tamanhos gigantescos no histórico
+                texto VARCHAR(255) NOT NULL,
                 concluida BOOLEAN DEFAULT FALSE,
                 data VARCHAR(50) NOT NULL
             )
@@ -49,6 +47,13 @@ def iniciar_banco():
         print("\n=== BANCO DE DADOS NA NUVEM CONECTADO E PRONTO! ===")
     except Exception as e:
         print(f"\n--- ERRO CRÍTICO AO INICIAR BANCO NA NUVEM: {e} ---")
+
+# ==================== ROTA PRINCIPAL (ENTREGA O FRONT-END) ====================
+
+@app.route('/')
+def pagina_inicial():
+    # Agora ele encontra o index.html na mesma pasta do app.py
+    return send_from_directory(app.template_folder, 'index.html')
 
 # ==================== ROTAS DE TAREFAS ====================
 
@@ -73,17 +78,14 @@ def adicionar_tarefa():
         dados = request.json or {}
         texto = dados.get('texto', '').strip()
         
-        # 🛡️ VALIDAÇÃO DE SEGURANÇA 1: String Vazia
         if not texto:
             return jsonify({"erro": "O texto da tarefa nao pode estar vazio."}), 400
             
-        # 🛡️ VALIDAÇÃO DE SEGURANÇA 2: Proteção contra estouro de memória
         if len(texto) > 255:
             return jsonify({"erro": "O texto da tarefa e longo demais (Max: 255 caracteres)."}), 400
             
         conexao = conectar()
         cursor = conexao.cursor()
-        # Tratamento seguro contra SQL Injection mantido através do parâmetro (%s)
         cursor.execute("INSERT INTO tarefas (texto, concluida) VALUES (%s, FALSE) RETURNING id", (texto,))
         conexao.commit()
         novo_id = cursor.fetchone()[0]
@@ -119,7 +121,6 @@ def adicionar_historico():
         concluida = bool(dados.get('concluida', False))
         data = dados.get('data', '').strip()
         
-        # 🛡️ VALIDAÇÃO DE SEGURANÇA 3: Evitar dados gigantes no histórico
         if len(texto) > 255 or len(data) > 50:
             return jsonify({"erro": "Dados de entrada invalidos ou muito extensos."}), 400
         
@@ -139,7 +140,6 @@ def adicionar_historico():
 @app.route('/api/frase', methods=['GET'])
 def obter_frase():
     try:
-        # 🛡️ SEGURANÇA: Definido timeout curto de 3 segundos para prevenir travamento do servidor Flask
         resposta_advice = requests.get("https://api.adviceslip.com/advice", timeout=3)
         frase_ingles = resposta_advice.json()['slip']['advice']
 
@@ -149,7 +149,6 @@ def obter_frase():
 
         return jsonify({"frase": frase_traduzida, "autor": "Conselho do Dia"}), 200
     except Exception:
-        # Fallback seguro caso as APIs caiam ou demorem para responder
         return jsonify({"frase": "A persistência é o caminho do êxito.", "autor": "Charles Chaplin (Backup)"}), 200
 
 # ==================== INICIALIZAÇÃO DO SERVIDOR ====================
