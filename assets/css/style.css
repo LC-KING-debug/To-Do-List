@@ -296,27 +296,46 @@ h2{
     color: #ffffff;
 }
 
-/* ==================== RESPONSIVIDADE MOBILE ==================== */
+/* ==================== RESPONSIVIDADE MOBILE (OTIMIZADO) ==================== */
 @media (max-width: 600px) {
+    /* 1. Remove o cursor customizado no celular*/
+    * {
+        cursor: default !important;
+    }
+
     html, body {
         overflow-x: hidden;
         width: 100%;
     }
 
+    /* 2. Suaviza o plano de fundo tirando o efeito 'fixed' que trava o scroll mobile */
+    body {
+        background-attachment: scroll !important;
+        background-size: cover;
+    }
+
+    /* 3. Remove sombras pesadas e neon que sobrecarregam a GPU do celular */
     main, .container, #abaInicio {
         width: 95% !important;
         max-width: 100% !important;
         padding: 15px;
         box-sizing: border-box;
+        box-shadow: none !important; /* Remove sombra gigante */
     }
 
-    /* Input agora preenche certinho no mobile */
+    /* Reduz o brilho pesado dos textos para rodar liso */
+    h1, h2, li {
+        text-shadow: 0 1px 2px rgba(0,0,0,0.8) !important;
+        animation: none !important; /* Desativa animações infinitas de brilho no mobile */
+    }
+
     #tarefaInput {
         width: 100% !important;
         max-width: 100% !important;
         height: 45px;
         font-size: 18px; 
         box-sizing: border-box;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.5) !important; /* Sombra simples e leve */
     }
 
     .botoes {
@@ -332,6 +351,7 @@ h2{
         max-width: 100% !important;
         margin: 5px 0;
         padding: 12px;
+        box-shadow: 0 4px 0 #576464 !important; /* Simplifica a sombra do botão */
     }
     
     h1 {
