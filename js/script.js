@@ -1,3 +1,8 @@
+// URLs do seu servidor local apontando para as novas rotas unificadas
+const API_TAREFAS   = "http://127.0.0.1:5000/api/tarefas";
+const API_HISTORICO = "http://127.0.0.1:5000/api/historico";
+const API_FRASE     = "http://127.0.0.1:5000/api/frase"; // Nova rota de frases do Flask!
+
 let tarefasExcluidas = [];
 
 // ==================== INICIALIZAÇÃO ====================
