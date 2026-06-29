@@ -5,7 +5,7 @@ function atualizarFrase() {
     elementoTexto.innerHTML = "<i>Buscando inspiração...</i>";
 
     // API de conselhos (Advice Slip)
-    fetch("https://api.adviceslip.com/advice")
+    fetch("https://phrase-api.vercel.app/api/list/all")
         .then(resposta => {
             if (!resposta.ok) throw new Error("Erro ao buscar conselho");
             return resposta.json();
