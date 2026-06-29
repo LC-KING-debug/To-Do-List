@@ -1,4 +1,4 @@
-# 📝 To-Do List Cloud Edition
+# 📝 To-Do List 
 
 Um aplicativo moderno de gerenciamento de tarefas (To-Do List) que evoluiu de um armazenamento local simples para uma arquitetura completa cliente-servidor com persistência de dados em nuvem.
 
