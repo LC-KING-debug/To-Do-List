@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 // URLs do meu servidor local apontando para as novas rotas unificadas
 const API_TAREFAS   = "http://127.0.0.1:5000/api/tarefas";
 const API_HISTORICO = "http://127.0.0.1:5000/api/historico";
 const API_FRASE     = "http://127.0.0.1:5000/api/frase"; // Nova rota de frases do Flask!
+=======
+// Exemplo de como deve ficar o topo do seu js/script.js
+const API_TAREFAS   = "https://todolist-api-backend.onrender.com/api/tarefas";
+const API_HISTORICO = "https://todolist-api-backend.onrender.com/api/historico";
+const API_FRASE     = "https://todolist-api-backend.onrender.com/api/frase";
+>>>>>>> 56cbcd0 (Deploy e requirements)
 
 let tarefasExcluidas = [];
 

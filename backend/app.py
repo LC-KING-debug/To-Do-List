@@ -6,6 +6,7 @@ import os
 
 app = Flask(__name__)
 
+
 # ==================== SEGURANÇA: CONFIGURAÇÃO DE CORS ====================
 
 CORS(app, origins="*") 
