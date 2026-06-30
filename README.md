@@ -61,4 +61,4 @@ Para garantir a integridade da aplicação e proteger os dados contra vulnerabil
 4. **Resiliência e Gerenciamento de Timeouts:** Definição de limites estritos de tempo (`timeout=3`) nas requisições HTTP do Proxy de Frases, impedindo que lentidões nas APIs externas de tradução travem o servidor ou causem o esgotamento de threads.
 5. **Configuração de Políticas de CORS:** Preparado para restringir requisições HTTP por meio do cabeçalho `Access-Control-Allow-Origin`, permitindo futuramente apenas o domínio oficial onde o front-end estará hospedado.
 
-<a><p>LINK:https://to-do-list-f8gp.onrender.com</p></a>
+<a><p>LINK DO DEPLOY NO RENDER: https://to-do-list-f8gp.onrender.com</p></a>
